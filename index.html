@@ -48,8 +48,10 @@
   .lab h3{font-size:30px;font-weight:800;font-stretch:78%;text-transform:uppercase;letter-spacing:-.01em;line-height:1;margin:10px 0 10px;transition:color .15s}
   .lab p{color:var(--muted);max-width:40ch;font-size:15px}
   .lab a::after{content:"↗";position:absolute;top:20px;right:22px;font-size:20px;transition:transform .2s,color .15s}
+  .lab a.in::after{content:"→"}
   .lab a:hover h3,.lab a:hover::after{color:var(--red)}
   .lab a:hover::after{transform:translate(3px,-3px)}
+  .lab a.in:hover::after{transform:translateX(4px)}
   footer{grid-column:1/-1;display:grid;grid-template-columns:repeat(12,1fr);column-gap:24px;border-top:2px solid var(--line);padding:22px 0 40px;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.03em}
   footer .f1{grid-column:1/7}.footer .f2{}
   footer .f2{grid-column:7/13;text-align:right}
@@ -108,6 +110,7 @@
     <div class="body">
       <div class="lab">
         <a href="https://polizzen.ch"><div class="n">Live</div><h3>polizzen.ch</h3><p>Compare Swiss health insurance plans and ask questions about them in plain language.</p></a>
+        <a class="in" href="/lab/dllm-macbook/"><div class="n">Ongoing</div><h3>Diffusion LMs on a MacBook</h3><p>Small experiments on language models that fill in text instead of writing it left to right, run entirely on a laptop.</p></a>
         <a href="https://github.com/playground-gg"><div class="n">Ongoing</div><h3>playground-gg</h3><p>Small, reproducible experiments with new models and techniques, written up as I go.</p></a>
         <a href="https://github.com/playground-gg/loqui"><div class="n">In progress</div><h3>On-device dictation</h3><p>An open-source iPhone keyboard that turns speech into text without leaving the device.</p></a>
       </div>

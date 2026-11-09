@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Playing with diffusion language models on a MacBook — Giovanni Giofrè</title>
+<meta name="description" content="A learning project: small, honest experiments on masked diffusion language models, run entirely on a MacBook. What they are, what is being tested, and what went wrong.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#f7f6f2;--ink:#111;--muted:#77756f;--line:#111;--red:#e2231a;--f:"Archivo",system-ui,sans-serif}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{background:var(--bg);color:var(--ink)}
+  body{font-family:var(--f);font-size:16px;line-height:1.55;font-stretch:100%;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .grid{display:grid;grid-template-columns:repeat(12,1fr);column-gap:24px;max-width:1200px;margin:0 auto;padding:0 32px}
+  .bar{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;padding:22px 0;border-bottom:2px solid var(--line);font-size:13px;font-weight:600;letter-spacing:.02em;text-transform:uppercase}
+  .bar .sq{display:inline-block;width:12px;height:12px;background:var(--red);margin-right:10px;vertical-align:-1px}
+  .bar>a{text-decoration:none}
+  .bar nav a{text-decoration:none;margin-left:24px}
+  .bar a:hover{color:var(--red)}
+  .hero{grid-column:1/-1;padding:72px 0 28px}
+  h1{font-weight:800;font-stretch:72%;font-size:clamp(40px,5.2vw,68px);line-height:1;letter-spacing:-.02em;text-transform:uppercase;max-width:18ch}
+  h1 .r{color:var(--red)}
+  .meta{grid-column:1/-1;display:grid;grid-template-columns:repeat(12,1fr);column-gap:24px;border-top:2px solid var(--line);padding:18px 0 60px}
+  .meta>div{font-size:13px;text-transform:uppercase;letter-spacing:.04em;font-weight:600}
+  .meta .m1{grid-column:1/4}.meta .m2{grid-column:4/7}.meta .m3{grid-column:7/13;text-transform:none;letter-spacing:0;font-weight:400;font-size:clamp(20px,2.4vw,30px);line-height:1.2;font-stretch:90%}
+  .muted{color:var(--muted)}
+  .sec{grid-column:1/-1;display:grid;grid-template-columns:repeat(12,1fr);column-gap:24px;border-top:1px solid var(--line);padding:32px 0 56px}
+  .sec h2{grid-column:1/4;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+  .sec h2 span{color:var(--red);margin-right:8px}
+  .sec .body{grid-column:4/13}
+  .about p{font-size:clamp(19px,1.8vw,23px);line-height:1.45;max-width:46ch;font-stretch:95%}
+  .about p+p{margin-top:14px;color:var(--muted)}
+  .prose p{font-size:17px;line-height:1.55;max-width:62ch}
+  .prose p+p{margin-top:16px}
+  .prose p b{font-weight:700}
+  .prose ul{list-style:none;max-width:62ch}
+  .prose li{font-size:17px;line-height:1.5;padding:12px 0 12px 26px;border-bottom:1px solid #d4d2cb;position:relative}
+  .prose li:first-child{padding-top:0}
+  .prose li::before{content:"";position:absolute;left:0;top:.7em;width:10px;height:10px;background:var(--red)}
+  .prose li:first-child::before{top:.2em}
+  figure{margin-top:32px;max-width:62ch}
+  figure img{display:block;width:100%;height:auto;border:1px solid #d4d2cb;background:#fff}
+  figcaption{margin-top:12px;font-size:14px;line-height:1.5;color:var(--muted)}
+  .lab{display:grid;grid-template-columns:repeat(2,1fr);border-top:2px solid var(--line)}
+  .lab a{display:block;text-decoration:none;padding:22px 22px 26px 0;border-bottom:1px solid #d4d2cb;position:relative}
+  .lab a:nth-child(odd){border-right:1px solid #d4d2cb}
+  .lab a:nth-child(even){padding-left:22px}
+  .lab a:last-child:nth-child(odd){grid-column:1/-1;border-right:0}
+  .lab .n{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  .lab h3{font-size:30px;font-weight:800;font-stretch:78%;text-transform:uppercase;letter-spacing:-.01em;line-height:1;margin:10px 0 10px;transition:color .15s}
+  .lab p{color:var(--muted);max-width:40ch;font-size:15px}
+  .lab a::after{content:"↗";position:absolute;top:20px;right:22px;font-size:20px;transition:transform .2s,color .15s}
+  .lab a:hover h3,.lab a:hover::after{color:var(--red)}
+  .lab a:hover::after{transform:translate(3px,-3px)}
+  footer{grid-column:1/-1;display:grid;grid-template-columns:repeat(12,1fr);column-gap:24px;border-top:2px solid var(--line);padding:22px 0 40px;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.03em}
+  footer .f1{grid-column:1/7}
+  footer .f2{grid-column:7/13;text-align:right}
+  footer a{text-decoration:none;border-bottom:2px solid var(--red)}
+  .rise{opacity:0;transform:translateY(24px);animation:rise .9s cubic-bezier(.16,1,.3,1) forwards}
+  .w1{animation-delay:.05s}.w2{animation-delay:.15s}.w3{animation-delay:.3s}
+  @keyframes rise{to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){.rise{animation:none;opacity:1;transform:none}}
+  @media (max-width:760px){
+    .grid{padding:0 20px}
+    .bar nav{display:none}
+    .meta .m1,.meta .m2,.meta .m3,.sec h2,.sec .body,footer .f1,footer .f2{grid-column:1/-1}
+    .meta .m2{margin-top:6px}.meta .m3{margin-top:18px}.sec h2{margin-bottom:18px}
+    footer .f2{text-align:left;margin-top:10px}
+    .lab{grid-template-columns:1fr}.lab a:nth-child(odd){border-right:0}.lab a:nth-child(even){padding-left:0}
+  }
+</style>
+</head>
+<body>
+<div class="grid">
+  <div class="bar"><a href="/"><span class="sq"></span>Giovanni Giofrè</a><nav><a href="/#about">About</a><a href="/#background">Background</a><a href="/#lab">Lab</a><a href="/#contact">Contact</a></nav></div>
+
+  <div class="hero">
+    <h1 class="rise w1">Playing with diffusion language models on a MacBook<span class="r">.</span></h1>
+  </div>
+
+  <div class="meta rise w3">
+    <div class="m1">Lab · Ongoing</div>
+    <div class="m2">MacBook <span class="muted">Apple Silicon · 24 GB · no cloud</span></div>
+    <div class="m3">A learning project: small, honest experiments on a new kind of language model, run entirely on a laptop.</div>
+  </div>
+
+  <div class="sec" id="idea">
+    <h2><span>01</span>The idea</h2>
+    <div class="body about">
+      <p>Most language models write one word at a time, left to right. A diffusion language model does something different: it starts from a fully blanked-out answer and fills in the blanks over a number of steps, a few words at a time, in whatever order it likes. That one change raises questions I did not have good answers to. In what order does it actually write? How many steps does an answer need? And when it says it is sure, is it right?</p>
+      <p>This project is my attempt to find out by building and measuring rather than by reading. Everything runs on my MacBook (Apple Silicon, 24 GB of memory): no cloud GPUs, no cluster. That keeps the experiments small, and it keeps them honest, because every run has to fit in the hours and the memory I actually have. It is a learning exercise, not research, and it makes no claim to anything new.</p>
+    </div>
+  </div>
+
+  <div class="sec" id="phases">
+    <h2><span>02</span>Three phases</h2>
+    <div class="body prose">
+      <p><b>Phase 1</b> looks at a real model, LLaDA, with 8 billion parameters, about the largest thing that fits on the laptop. Watching it fill in answers to school maths problems, it turns out to write almost left to right anyway: the words next to text it already knows are the easiest to guess, so they go first. It is also over-confident. On one task it said it was 87% sure and was right 42% of the time.</p>
+      <p><b>Phase 2</b> builds a tiny diffusion model from scratch, small enough to train in 13 minutes, that fills in 4×4 Sudoku grids. Then it is improved with reinforcement learning, which here means: let the model try, check whether the grid is valid, and nudge it towards the attempts that worked. The training rule (an objective called wd1, from a recent paper) is written by hand. A variant that the paper says should collapse did collapse, then recovered and won. That was not supposed to happen.</p>
+      <p><b>Phase 3</b> takes that result apart with a few hundred short training runs: why the variant collapses, what makes wd1 slow, whether the model can learn the order in which to fill the cells, and whether it can be taught to say how confident it is. Before each experiment the expected outcome is written down. About a third of those predictions turned out wrong, and the write-up says so.</p>
+      <figure>
+        <img src="unmasking-order.png" width="1140" height="306" alt="Two heatmaps of a 128-word answer from LLaDA. Top: the step at which each word was filled in, running from dark on the left to yellow on the right. Bottom: the model's confidence in each word, mostly high with scattered low spots." loading="lazy">
+        <figcaption>One answer from LLaDA, 128 words long, filled in with two rules: surest word first (top row of each panel) and random order (bottom row). Upper panel: when each word was filled in, dark early and yellow late. With the surest-first rule the colour runs from left to right in four blocks, so the model writes mostly in order even though nothing forces it to. Lower panel: how sure it was about each word; the darker, the less sure.</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="sec" id="testing">
+    <h2><span>03</span>What we are testing</h2>
+    <div class="body prose">
+      <ul>
+        <li>In what order a diffusion model fills in an answer, and whether the order matters for getting it right.</li>
+        <li>How many fill-in steps an answer needs before quality drops. Fewer steps means a faster answer.</li>
+        <li>Whether the model's confidence can be trusted: when it says 90% sure, is it right nine times out of ten?</li>
+        <li>Whether reinforcement learning can improve a small model with nothing but a "valid / not valid" checker, and why one version of it collapses while another does not.</li>
+        <li>Whether the model can learn which cell to fill next, and learn to state its own confidence honestly.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec" id="code">
+    <h2><span>04</span>Code and write-up</h2>
+    <div class="body">
+      <div class="lab">
+        <a href="https://github.com/giovannigiofre/wsp-adaptive-decision-models"><div class="n">GitHub</div><h3>wsp-adaptive-decision-models</h3><p>Code, configs, results and two reports: one in plain words, one technical. Failed runs and wrong predictions are kept in.</p></a>
+      </div>
+    </div>
+  </div>
+
+  <footer id="contact">
+    <div class="f1"><a href="/">← Back home</a></div>
+    <div class="f2"><a href="mailto:giofregiovanni16@gmail.com">Email</a> &nbsp; <a href="https://www.linkedin.com/in/giovanni-giofre/">LinkedIn</a> &nbsp; <a href="https://github.com/giovannigiofre">GitHub</a></div>
+  </footer>
+</div>
+</body>
+</html>
