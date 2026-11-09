@@ -2,14 +2,7 @@
 
 Personal site. Plain static HTML/CSS, no build step.
 
-## Current state
-Three design proposals live side by side while one gets picked:
-
-- `/a/` Editorial: warm paper, Fraunces + IBM Plex
-- `/b/` Notebook: dark, DM Mono + Instrument Serif
-- `/c/` Basel grid: Swiss style, Archivo
-
-`/index.html` is a temporary chooser. Once a design is chosen, its `index.html` moves to the root and the `a/ b/ c/` folders are deleted.
+Single page (`index.html`), Swiss-grid style: Archivo, black / off-white / red.
 
 ## Run locally
 ```bash
