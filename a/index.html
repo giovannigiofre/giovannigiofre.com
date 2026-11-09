@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Giovanni Giofrè — AI Engineer, Basel</title>
+<meta name="description" content="Giovanni Giofrè is an AI engineer based in Basel who turns GenAI ideas into systems people actually use.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f3efe6; --ink:#1c1a16; --muted:#6f695e; --rule:#d9d2c3; --accent:#c2410c;
+    --serif:"Fraunces", Georgia, serif; --sans:"IBM Plex Sans", system-ui, sans-serif; --mono:"IBM Plex Mono", ui-monospace, monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{background:var(--paper);color:var(--ink)}
+  body{font-family:var(--sans);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E")}
+  a{color:inherit}
+  .wrap{max-width:760px;margin:0 auto;padding:72px 28px 56px}
+  header{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mono);font-size:12.5px;letter-spacing:.04em;color:var(--muted);text-transform:uppercase}
+  header nav a{text-decoration:none;margin-left:22px}
+  header nav a:hover{color:var(--accent)}
+  .hero{padding:120px 0 72px;border-bottom:1px solid var(--rule)}
+  h1{font-family:var(--serif);font-weight:350;font-size:clamp(52px,9vw,96px);line-height:.98;letter-spacing:-.02em;font-variation-settings:"opsz" 144}
+  h1 em{font-style:italic;font-weight:300;color:var(--accent)}
+  .role{margin-top:28px;font-family:var(--mono);font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  .lede{margin-top:22px;font-family:var(--serif);font-size:clamp(22px,3vw,28px);line-height:1.35;font-weight:350;max-width:30ch}
+  section{display:grid;grid-template-columns:140px 1fr;gap:28px;padding:56px 0;border-bottom:1px solid var(--rule)}
+  .label{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding-top:6px}
+  .label b{color:var(--accent);font-weight:500;margin-right:8px}
+  .about p{max-width:58ch}
+  .about p+p{margin-top:14px}
+  ol.timeline{list-style:none}
+  ol.timeline li{display:grid;grid-template-columns:1fr auto;gap:16px;padding:14px 0;border-top:1px dashed var(--rule)}
+  ol.timeline li:first-child{border-top:0;padding-top:0}
+  .t-role{font-family:var(--serif);font-size:21px;font-weight:400}
+  .t-org{color:var(--muted)}
+  .t-when{font-family:var(--mono);font-size:13px;color:var(--muted);white-space:nowrap;padding-top:5px}
+  ul.lab{list-style:none}
+  ul.lab li a{display:grid;grid-template-columns:1fr auto;gap:16px;padding:18px 0;border-top:1px solid var(--rule);text-decoration:none;transition:padding .25s ease}
+  ul.lab li:first-child a{border-top:0;padding-top:0}
+  ul.lab li a:hover{padding-left:10px}
+  ul.lab li a:hover .l-name{color:var(--accent)}
+  .l-name{font-family:var(--serif);font-size:24px;font-weight:400;transition:color .2s}
+  .l-name span{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-left:10px;vertical-align:middle;border:1px solid var(--rule);padding:2px 7px;border-radius:99px}
+  .l-desc{color:var(--muted);max-width:52ch;margin-top:2px}
+  .arrow{font-family:var(--serif);font-size:24px;color:var(--muted);transition:transform .25s,color .2s}
+  ul.lab li a:hover .arrow{transform:translateX(4px);color:var(--accent)}
+  footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;padding-top:36px;font-family:var(--mono);font-size:12.5px;color:var(--muted)}
+  footer a{color:var(--ink);text-decoration-color:var(--accent);text-underline-offset:4px}
+  .reveal{opacity:0;transform:translateY(14px);animation:up .8s cubic-bezier(.2,.7,.2,1) forwards}
+  .d1{animation-delay:.05s}.d2{animation-delay:.18s}.d3{animation-delay:.3s}.d4{animation-delay:.42s}.d5{animation-delay:.54s}
+  @keyframes up{to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){.reveal{animation:none;opacity:1;transform:none}}
+  @media (max-width:640px){
+    .wrap{padding:40px 22px}
+    .hero{padding:80px 0 48px}
+    section{grid-template-columns:1fr;gap:14px;padding:40px 0}
+    header nav{display:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="reveal d1">
+    <span>giovannigiofre.com</span>
+    <nav><a href="#about">About</a><a href="#background">Background</a><a href="#lab">Lab</a><a href="#contact">Contact</a></nav>
+  </header>
+
+  <div class="hero">
+    <h1 class="reveal d2">Giovanni<br><em>Giofrè</em></h1>
+    <p class="role reveal d3">AI Engineer · Basel, Switzerland</p>
+    <p class="lede reveal d4">I turn GenAI ideas into systems people actually use.</p>
+  </div>
+
+  <section id="about" class="reveal d5">
+    <div class="label"><b>01</b>About</div>
+    <div class="about">
+      <p>I'm an AI engineer based in Basel. I like working close to the people who will use what I build: understanding the problem first, then shipping something that holds up with real data and real users.</p>
+      <p>Outside of work I run small experiments to understand how new models and techniques behave in practice, and I build side projects at the intersection of AI and everyday problems.</p>
+    </div>
+  </section>
+
+  <section id="background">
+    <div class="label"><b>02</b>Background</div>
+    <ol class="timeline">
+      <li><div><div class="t-role">AI Engineer</div><div class="t-org">ekona</div></div><div class="t-when">2026 —</div></li>
+      <li><div><div class="t-role">Data Scientist</div><div class="t-org">Roche</div></div><div class="t-when">2024 — 2026</div></li>
+      <li><div><div class="t-role">Intern</div><div class="t-org">PwC</div></div><div class="t-when"></div></li>
+      <li><div><div class="t-role">MSc Applied Data Science for Banking &amp; Finance</div><div class="t-org">Università Cattolica · Universidade do Minho</div></div><div class="t-when"></div></li>
+    </ol>
+  </section>
+
+  <section id="lab">
+    <div class="label"><b>03</b>Lab</div>
+    <div>
+      <p class="l-desc" style="margin:0 0 22px">Things I'm building and experimenting with, mostly for fun and to learn.</p>
+      <ul class="lab">
+        <li><a href="https://polizzen.ch"><div><div class="l-name">polizzen.ch<span>live</span></div><div class="l-desc">Compare Swiss health insurance plans and ask questions about them in plain language.</div></div><div class="arrow">→</div></a></li>
+        <li><a href="https://github.com/playground-gg"><div><div class="l-name">playground-gg<span>ongoing</span></div><div class="l-desc">Small, reproducible experiments with new models and techniques, written up as I go.</div></div><div class="arrow">→</div></a></li>
+        <li><a href="https://github.com/giovannigiofre"><div><div class="l-name">Pillar 3a optimizer<span>open source</span></div><div class="l-desc">A planning tool for the Swiss third-pillar pension, from contributions to withdrawals.</div></div><div class="arrow">→</div></a></li>
+        <li><a href="https://github.com/giovannigiofre"><div><div class="l-name">On-device dictation<span>in progress</span></div><div class="l-desc">An open-source iPhone keyboard that turns speech into text without leaving the device.</div></div><div class="arrow">→</div></a></li>
+      </ul>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <span>Based in Basel · Italian, English, Spanish (basic)</span>
+    <span>CV available on request — <a href="mailto:giofregiovanni16@gmail.com">email</a> · <a href="https://www.linkedin.com/in/giovanni-giofre/">LinkedIn</a> · <a href="https://github.com/giovannigiofre">GitHub</a></span>
+  </footer>
+</div>
+</body>
+</html>
