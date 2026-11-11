@@ -83,39 +83,50 @@
   figure+p{margin-top:28px}
   figcaption b{font-weight:700;color:var(--ink)}
   figcaption{margin-top:12px;font-size:14px;line-height:1.5;color:var(--muted)}
-  .how{max-width:none;margin-top:36px}
-  .how>h4{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px}
-  .arch{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;max-width:760px}
-  .arch-c{min-width:0;display:flex;flex-direction:column}
-  .arch-c h5{font-size:15px;font-weight:800;font-stretch:80%;text-transform:uppercase;line-height:1.1;border-top:2px solid var(--line);padding-top:10px}
-  .arch-c h5 small{display:block;font-size:12px;font-weight:600;font-stretch:100%;text-transform:none;color:var(--muted);margin-top:4px}
-  .arch-k{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:14px 0 6px}
-  .arch-t{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:3px}
-  .arch-t i{font-style:normal;height:30px;display:flex;align-items:center;justify-content:center;border:1px solid #d4d2cb;background:#fff;font-size:12px;font-weight:700;font-stretch:80%;overflow:hidden;transition:color .25s,background .25s,border-color .25s}
-  .arch-t i.b{background:#e9e7e0;color:#77756f;font-weight:600;font-size:10px}
+  .more{margin-top:22px;max-width:580px}
+  .more summary{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:13px 16px;border:2px solid var(--line);cursor:pointer;list-style:none;font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;line-height:1.3;transition:background .15s,color .15s}
+  .more summary::-webkit-details-marker{display:none}
+  .more summary small{display:block;font-size:13px;font-weight:500;letter-spacing:0;text-transform:none;color:var(--muted);margin-top:2px;transition:color .15s}
+  .more summary::after{content:"+";flex:none;font-size:26px;font-weight:400;line-height:1;color:var(--red);transition:transform .25s}
+  .more[open] summary::after{transform:rotate(45deg)}
+  .more summary:hover,.more[open] summary{background:var(--ink);color:#fff}
+  .more summary:hover small,.more[open] summary small{color:#b9b6ad}
+  .more summary:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+  .more-b{border:2px solid var(--line);border-top:0;padding:18px 16px 20px;background:#fff}
+  .about .more p{font-size:15px;line-height:1.5;max-width:none;color:var(--ink);font-stretch:100%}
+  .about .more p+p{margin-top:10px;color:var(--ink)}
+  .about .more+p{margin-top:22px;color:var(--muted)}
+  .arch{display:grid;grid-template-columns:minmax(0,1fr) 24px minmax(0,1fr);align-items:center;margin-top:18px}
+  .arch>*{min-width:0}
+  .arch h5{align-self:end;font-size:clamp(12px,3.3vw,15px);font-weight:800;font-stretch:78%;text-transform:uppercase;line-height:1.1;border-top:2px solid var(--line);padding:8px 0 10px}
+  .arch h5 small{display:block;font-size:11.5px;font-weight:600;font-stretch:95%;text-transform:none;color:var(--muted);margin-top:3px}
+  .arch-d{justify-self:center;width:18px;height:18px;border-radius:50%;background:var(--red);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center}
+  .arch-q{justify-self:center;font-size:15px;font-weight:800;color:#b9b6ad}
+  .arch-t{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:2px}
+  .arch-t i{font-style:normal;height:26px;display:flex;align-items:center;justify-content:center;border:1px solid #d4d2cb;background:#fff;font-size:clamp(9.5px,2.6vw,12px);font-weight:700;font-stretch:75%;overflow:hidden;transition:color .25s,background .25s,border-color .25s}
+  .arch-t i.b{background:#e9e7e0;color:transparent}
   .arch-t i.e{background:transparent;border-color:transparent;color:transparent}
-  .arch-t i.g{color:#8f8d86;border-style:dashed;border-color:#8f8d86}
+  .arch-t i.g{color:#77756f;border-style:dashed;border-color:#8f8d86}
   .arch-t i.n{color:#fff;background:var(--red);border-color:var(--red)}
-  .arch-v{height:16px;display:flex;justify-content:center}
+  .arch-v{height:10px;display:flex;justify-content:center}
   .arch-v::before{content:"";width:2px;background:var(--line)}
-  .arch-b{border:2px solid var(--line);background:#fff;padding:8px 10px;font-size:12.5px;line-height:1.3;color:var(--muted)}
-  .arch-b b{display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
-  .arch-x{border:2px solid var(--line);background:#fff;padding:10px;position:relative}
-  .arch-x>b{display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase}
-  .arch-x>em{position:absolute;top:8px;right:10px;font-style:normal;font-size:12px;font-weight:800;color:var(--red)}
-  .arch-at{display:grid;grid-template-columns:84px minmax(0,1fr);gap:12px;align-items:center;margin-top:10px}
-  .arch-m{display:grid;grid-template-columns:repeat(6,1fr);gap:2px;aspect-ratio:1}
-  .arch-m i{background:#e9e7e0;transition:background .25s}
+  .arch-b{border:2px solid var(--line);background:var(--bg);padding:5px 6px;font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;text-align:center}
+  .arch-x{border:2px solid var(--line);background:var(--bg);padding:7px 6px 8px;text-align:center}
+  .arch-x b{display:block;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase}
+  .arch-x b em{font-style:normal;color:var(--red)}
+  .arch-m{display:grid;grid-template-columns:repeat(6,1fr);gap:2px;aspect-ratio:1;width:min(100%,92px);margin:8px auto 6px}
+  .arch-m i{background:#e2e0d9;transition:background .25s}
   .arch-m i.s{background:var(--ink)}
   .arch-m i.h{background:var(--red)}
-  .arch-at p{font-size:12.5px;line-height:1.3;color:var(--muted)}
-  .arch-at p b{color:var(--ink);font-weight:700}
-  .arch-f{margin-top:10px;border-top:1px solid #d4d2cb;padding-top:8px;font-size:12.5px;color:var(--muted)}
-  .arch-l{margin-top:10px;font-size:12.5px;line-height:1.35;font-weight:600;border-left:3px solid var(--red);padding-left:10px}
-  .arch-l span{display:block;font-weight:400;color:var(--muted);margin-top:4px}
-  .arch-n{margin-top:6px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
-  .how figcaption{margin-top:18px;font-size:14px;line-height:1.5;color:var(--muted);max-width:62ch}
-  .how+p{margin-top:28px}
+  .arch-x span{display:block;font-size:11.5px;line-height:1.25;color:var(--muted)}
+  .arch-n{font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);padding-top:6px;align-self:start}
+  .arch-o{align-self:start;font-size:12px;line-height:1.3;font-weight:600;padding-top:6px}
+  .diff{list-style:none;margin-top:18px;border-top:1px solid #d4d2cb}
+  .diff li{display:grid;grid-template-columns:18px minmax(0,1fr);gap:10px;padding:10px 0;border-bottom:1px solid #d4d2cb;font-size:14.5px;line-height:1.4}
+  .diff li i{font-style:normal;margin-top:1px;width:18px;height:18px;border-radius:50%;background:var(--red);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center}
+  .diff li b{font-weight:700}
+  .diff li.q i{background:none;color:#b9b6ad;font-size:15px}
+  .diff li.q{color:var(--muted)}
   .lab{display:grid;grid-template-columns:repeat(2,1fr);border-top:2px solid var(--line)}
   .lab a{display:block;text-decoration:none;padding:22px 22px 26px 0;border-bottom:1px solid #d4d2cb;position:relative}
   .lab a:nth-child(odd){border-right:1px solid #d4d2cb}
@@ -142,7 +153,7 @@
     .meta .m2{margin-top:6px}.meta .m3{margin-top:18px}.sec h2{margin-bottom:18px}
     footer .f2{text-align:left;margin-top:10px}
     .plots{grid-template-columns:1fr}
-    .arch{grid-template-columns:1fr;gap:36px}
+    .more-b{padding:16px 12px 18px}
     .hero{grid-template-columns:minmax(0,1fr);row-gap:36px;padding-top:48px}.sdk{max-width:300px}.sdk-b div{font-size:15px}
     .lab{grid-template-columns:1fr}.lab a:nth-child(odd){border-right:0}.lab a:nth-child(even){padding-left:0}
   }
@@ -172,50 +183,34 @@
     <div class="body about">
       <p>Most language models write one word at a time, left to right. A <b>diffusion language model</b> does something different: it starts from a fully blanked-out answer and <b>fills in the blanks</b> over a number of steps, a few words at a time, <b>in whatever order it likes</b>. That one change raises questions I did not have good answers to. In what order does it actually write? How many steps does an answer need? And when it says it is sure, is it right?</p>
 
-      <figure class="how" id="how">
-        <h4>Same network, wired differently</h4>
-        <div class="arch" role="img" aria-label="Animated diagram of two transformer architectures side by side. Left, the autoregressive model used by chatbots: the words written so far go in, attention lets each word see only the words before it, and one new word comes out per pass. Right, the masked diffusion model: the whole text with blanks goes in, attention lets every position see every other, a guess comes out for every blank, the surest are kept and the rest are blanked again.">
-          <div class="arch-c">
-            <h5>Autoregressive transformer<small>Claude, ChatGPT and most chatbots</small></h5>
-            <div class="arch-k">Input</div>
-            <div class="arch-t" id="ai1"></div>
-            <div class="arch-v"></div>
-            <div class="arch-b"><b>Embedding</b>Each word and its position become a vector.</div>
-            <div class="arch-v"></div>
-            <div class="arch-x"><b>Transformer block</b><em>× N</em>
-              <div class="arch-at"><div class="arch-m" id="am1"></div><p><b>Causal attention.</b> Each word sees only the words <b>before</b> it. The square shows who sees whom: half of it is switched off.</p></div>
-              <div class="arch-f">+ a feed-forward layer, the same in both.</div>
-            </div>
-            <div class="arch-v"></div>
-            <div class="arch-b"><b>Output layer</b>A probability for every word in the vocabulary.</div>
-            <div class="arch-v"></div>
-            <div class="arch-k" style="margin-top:0">Output</div>
-            <div class="arch-t" id="ao1"></div>
-            <div class="arch-n" id="an1">&nbsp;</div>
-            <div class="arch-l">Loop: add the new word at the end, run again. One word per pass, never changed afterwards.<span>Training: predict the next word.</span></div>
+      <details class="more" id="how">
+        <summary><span>New to diffusion models?<small>A one-minute picture, next to the kind of model behind Claude and ChatGPT</small></span></summary>
+        <div class="more-b">
+          <p>The name comes from <b>image generators</b>, which start from pure noise and clean it up step by step. For text, the "noise" is <b>blanks</b>: the model starts from an answer made only of blanks and replaces them with words over a few passes.</p>
+          <p>Inside, it is the <b>same kind of network</b> a chatbot uses, a transformer. Three things are wired differently.</p>
+          <div class="arch" role="img" aria-label="Animated diagram of two transformer architectures side by side, with the same blocks: input, embedding, transformer blocks, output layer, output. Left, the autoregressive model used by chatbots: the words written so far go in, attention lets each word see only the words before it, and one new word comes out per pass. Right, the masked diffusion model: the whole text with blanks goes in, attention lets every position see every other, a guess comes out for every blank, the surest are kept and the rest are blanked again.">
+          <h5>Autoregressive<small>Claude, ChatGPT</small></h5><span></span><h5>Masked diffusion<small>LLaDA, this project</small></h5>
+          <div class="arch-t" id="ai1"></div><span class="arch-d">1</span><div class="arch-t" id="ai2"></div>
+          <div class="arch-v"></div><span></span><div class="arch-v"></div>
+          <div class="arch-b">Embedding</div><span class="arch-q">=</span><div class="arch-b">Embedding</div>
+          <div class="arch-v"></div><span></span><div class="arch-v"></div>
+          <div class="arch-x"><b>Transformer block <em>× N</em></b><div class="arch-m" id="am1"></div><span>Attention looks <b style="display:inline;font-size:inherit;letter-spacing:0;text-transform:none;color:var(--ink)">only back</b></span></div><span class="arch-d">2</span><div class="arch-x"><b>Transformer block <em>× N</em></b><div class="arch-m" id="am2"></div><span>Attention looks <b style="display:inline;font-size:inherit;letter-spacing:0;text-transform:none;color:var(--ink)">everywhere</b></span></div>
+          <div class="arch-v"></div><span></span><div class="arch-v"></div>
+          <div class="arch-b">Output layer</div><span class="arch-q">=</span><div class="arch-b">Output layer</div>
+          <div class="arch-v"></div><span></span><div class="arch-v"></div>
+          <div class="arch-t" id="ao1"></div><span class="arch-d">3</span><div class="arch-t" id="ao2"></div>
+          <div class="arch-n" id="an1">&nbsp;</div><span></span><div class="arch-n" id="an2">&nbsp;</div>
+          <div class="arch-o">↺ Add the word at the end, run again</div><span></span><div class="arch-o">↺ Keep the surest, blank the rest, run again</div>
           </div>
-          <div class="arch-c">
-            <h5>Masked diffusion transformer<small>LLaDA, and the small models of this project</small></h5>
-            <div class="arch-k">Input</div>
-            <div class="arch-t" id="ai2"></div>
-            <div class="arch-v"></div>
-            <div class="arch-b"><b>Embedding</b>Each word and its position become a vector.</div>
-            <div class="arch-v"></div>
-            <div class="arch-x"><b>Transformer block</b><em>× N</em>
-              <div class="arch-at"><div class="arch-m" id="am2"></div><p><b>Full attention.</b> Every position sees <b>every other</b>, left and right, blanks included. Nothing is switched off.</p></div>
-              <div class="arch-f">+ a feed-forward layer, the same in both.</div>
-            </div>
-            <div class="arch-v"></div>
-            <div class="arch-b"><b>Output layer</b>A probability for every word in the vocabulary.</div>
-            <div class="arch-v"></div>
-            <div class="arch-k" style="margin-top:0">Output</div>
-            <div class="arch-t" id="ao2"></div>
-            <div class="arch-n" id="an2">&nbsp;</div>
-            <div class="arch-l">Loop: keep the surest guesses, blank the rest again, run again. Several words per pass, in any order.<span>Training: hide a random share of the words, predict the hidden ones.</span></div>
-          </div>
+          <ol class="diff">
+            <li><i>1</i><span><b>What goes in.</b> A chatbot reads the text written so far. A diffusion model reads the <b>whole answer at once</b>, blanks included.</span></li>
+            <li><i>2</i><span><b>Who sees whom.</b> In the square, row = a word, dark = the words it may look at. A chatbot's word sees only what came <b>before</b> it; here every position sees <b>every other</b>.</span></li>
+            <li><i>3</i><span><b>What comes out.</b> A chatbot produces <b>one next word</b> per pass and never changes it. A diffusion model proposes a word for <b>every blank</b>, keeps the ones it is surest of and tries the rest again.</span></li>
+            <li class="q"><i>=</i><span>Everything else is the same. So is the training idea: a chatbot learns to predict the next word, a diffusion model learns to <b>predict hidden words</b>, with a different share hidden each time.</span></li>
+          </ol>
+          <p style="margin-top:14px">The result: an answer of 100 words takes a chatbot 100 passes, and a diffusion model as many as you allow, <b>say 10 or 20</b>. Fewer passes is faster and usually less accurate. That trade-off is what this project measures. The Sudoku model of phase 4 is the right-hand column with 6 blocks and 81 positions, one per cell.</p>
         </div>
-        <figcaption>The building blocks are the same. A diffusion language model differs in <b>three places</b>: the input is the whole answer with blanks instead of the text so far, attention runs in <b>both directions</b> instead of only backwards, and the output is a guess for <b>every blank at once</b> instead of one next word. The Sudoku model of phase 4 is exactly the right-hand column with N = 6 blocks, vectors of 160 numbers and 81 positions, one per cell. The sentence is an illustration.</figcaption>
-      </figure>
+      </details>
       <p>This project is my attempt to find out by <b>building and measuring</b> rather than by reading. <b>Everything runs on my MacBook</b> (Apple Silicon, 24 GB of memory): no cloud GPUs, no cluster. That keeps the experiments small, and it keeps them honest, because every run has to fit in the hours and the memory I actually have. It is a <b>learning exercise, not research</b>, and it makes no claim to anything new.</p>
     </div>
   </div>
@@ -335,37 +330,37 @@
 </div>
 <script>
 (function(){
-  var W=["The","cat","sat","on","the","mat"],ORD=[[5,0],[1,3],[2,4]],N=6,
-      $=function(x){return document.getElementById(x)},E={},k,i;
+  var W=["The","cat","sat","on","the","mat"],ORD=[[5,0],[1,3],[2,4]],N=6,box=document.getElementById('how'),
+      $=function(x){return document.getElementById(x)},E={},i,timer=null,t=0;
   ['ai1','ao1','ai2','ao2'].forEach(function(id){E[id]=[];for(i=0;i<N;i++){var x=document.createElement('i');$(id).appendChild(x);E[id].push(x);}});
   ['am1','am2'].forEach(function(id){E[id]=[];for(i=0;i<N*N;i++){var x=document.createElement('i');$(id).appendChild(x);E[id].push(x);}});
   function set(el,txt,cls){el.textContent=txt;el.className=cls;}
   function draw(t){
     var done=t>=12,j,r,c;
-    /* autoregressive: one word every 2 ticks; odd tick = the new word comes out */
+    /* autoregressive: one word every 2 ticks; on the odd tick the new word comes out */
     var have=done?N:Math.floor(t/2),out=!done&&t%2===1;
-    for(j=0;j<N;j++){
-      set(E.ai1[j],W[j],j<have?'':'e');
-      set(E.ao1[j],W[j],out&&j===have?'n':'e');
-    }
-    for(r=0;r<N;r++)for(c=0;c<N;c++)E.am1[r*N+c].className=c<=r?((!done&&r===Math.max(have-1,0)&&have>0)?'h':'s'):'';
-    $('an1').textContent='Pass '+Math.min(N,have+(out?1:0))+' of 6 · '+(have+(out?1:0)>N?N:have+(out?1:0))+' of 6 words';
+    for(j=0;j<N;j++){set(E.ai1[j],W[j],j<have?'':'e');set(E.ao1[j],W[j],out&&j===have?'n':'e');}
+    for(r=0;r<N;r++)for(c=0;c<N;c++)E.am1[r*N+c].className=c<=r?((!done&&have>0&&r===have-1)?'h':'s'):'';
+    $('an1').textContent='Pass '+Math.min(N,have+(out?1:0))+' of 6';
     /* diffusion: 3 passes of 4 ticks: blanks, guesses, keep two, settle */
     var step=done?3:Math.floor(t/4),sub=done?0:t%4,kept={};
     for(j=0;j<step;j++){kept[ORD[j][0]]=1;kept[ORD[j][1]]=1;}
     for(j=0;j<N;j++){
       var pick=!done&&ORD[step].indexOf(j)>=0;
-      if(kept[j]||(sub===3&&pick))set(E.ai2[j],W[j],'');else set(E.ai2[j],'blank','b');
+      if(kept[j]||(sub===3&&pick))set(E.ai2[j],W[j],'');else set(E.ai2[j],W[j],'b');
       if(done||kept[j]||sub===0||sub===3)set(E.ao2[j],W[j],'e');
       else set(E.ao2[j],W[j],sub===2&&pick?'n':'g');
     }
     for(i=0;i<N*N;i++)E.am2[i].className=(!done&&(sub===1||sub===2))?'h':'s';
-    var nk=step*2+(sub===3?2:0);
-    $('an2').textContent='Pass '+Math.min(3,step+(done?0:1))+' of 3 · '+nk+' of 6 words';
+    $('an2').textContent='Pass '+Math.min(3,step+(done?0:1))+' of 3';
   }
-  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches){draw(6);return;}
-  var t=0;draw(0);
-  (function tick(){setTimeout(function(){t=t>=12?0:t+1;draw(t);tick();},t>=12?2600:900);})();
+  var still=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function tick(){timer=setTimeout(function(){t=t>=12?0:t+1;draw(t);tick();},t>=12?2600:900);}
+  draw(still?6:0);
+  box.addEventListener('toggle',function(){
+    clearTimeout(timer);timer=null;
+    if(box.open&&!still){t=0;draw(0);tick();}
+  });
 })();
 </script>
 <script>
