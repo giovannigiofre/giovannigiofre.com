@@ -31,7 +31,23 @@
   .bar>a{text-decoration:none}
   .bar nav a{text-decoration:none;margin-left:24px}
   .bar a:hover{color:var(--red)}
-  .hero{grid-column:1/-1;padding:72px 0 28px}
+  .hero{grid-column:1/-1;padding:72px 0 28px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,300px);column-gap:48px;align-items:end}
+  .sdk{min-width:0}
+  .sdk-b{display:grid;grid-template-columns:repeat(9,1fr);aspect-ratio:1;border:2px solid var(--line);background:#fff}
+  .sdk-b div{display:flex;align-items:center;justify-content:center;font-weight:700;font-stretch:85%;font-size:clamp(13px,1.5vw,17px);line-height:1;border-right:1px solid #d4d2cb;border-bottom:1px solid #d4d2cb;position:relative}
+  .sdk-b div:nth-child(9n){border-right:0}
+  .sdk-b div:nth-child(n+73){border-bottom:0}
+  .sdk-b div:nth-child(9n+3),.sdk-b div:nth-child(9n+6){border-right:2px solid var(--line)}
+  .sdk-b div:nth-child(n+19):nth-child(-n+27),.sdk-b div:nth-child(n+46):nth-child(-n+54){border-bottom:2px solid var(--line)}
+  .sdk-b .w{color:var(--red)}
+  .sdk-b .x::after{content:"";width:34%;height:34%;background:#d4d2cb}
+  .sdk-b .new{animation:pop .5s cubic-bezier(.16,1,.3,1)}
+  @keyframes pop{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:none}}
+  .sdk-l{display:flex;justify-content:space-between;gap:12px;margin-top:10px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+  .sdk-l span:last-child{color:var(--muted)}
+  .sdk-p{display:flex;gap:4px;margin-top:8px}
+  .sdk-p i{flex:1;height:4px;background:#d4d2cb}
+  .sdk-p i.on{background:var(--red)}
   h1{font-weight:800;font-stretch:72%;font-size:clamp(40px,5.2vw,68px);line-height:1;letter-spacing:-.02em;text-transform:uppercase;max-width:18ch}
   h1 .r{color:var(--red)}
   .meta{grid-column:1/-1;display:grid;grid-template-columns:repeat(12,1fr);column-gap:24px;border-top:2px solid var(--line);padding:18px 0 60px}
@@ -85,7 +101,7 @@
   .rise{opacity:0;transform:translateY(24px);animation:rise .9s cubic-bezier(.16,1,.3,1) forwards}
   .w1{animation-delay:.05s}.w2{animation-delay:.15s}.w3{animation-delay:.3s}
   @keyframes rise{to{opacity:1;transform:none}}
-  @media (prefers-reduced-motion:reduce){.rise{animation:none;opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){.rise{animation:none;opacity:1;transform:none}.sdk-b .new{animation:none}}
   @media (max-width:760px){
     .grid{padding:0 20px}
     .bar nav{display:none}
@@ -93,6 +109,7 @@
     .meta .m2{margin-top:6px}.meta .m3{margin-top:18px}.sec h2{margin-bottom:18px}
     footer .f2{text-align:left;margin-top:10px}
     .plots{grid-template-columns:1fr}
+    .hero{grid-template-columns:minmax(0,1fr);row-gap:36px;padding-top:48px}.sdk{max-width:300px}.sdk-b div{font-size:15px}
     .lab{grid-template-columns:1fr}.lab a:nth-child(odd){border-right:0}.lab a:nth-child(even){padding-left:0}
   }
 </style>
@@ -103,6 +120,11 @@
 
   <div class="hero">
     <h1 class="rise w1">Playing with diffusion language models on a MacBook<span class="r">.</span></h1>
+    <div class="sdk rise w2">
+      <div class="sdk-b" id="sdk" role="img" aria-label="Animation: a Sudoku grid whose 51 empty cells are filled in over four steps, a dozen cells at a time."></div>
+      <div class="sdk-p" id="sdkp"><i></i><i></i><i></i><i></i></div>
+      <div class="sdk-l"><span id="sdkl">Start</span><span>Illustration</span></div>
+    </div>
   </div>
 
   <div class="meta rise w3">
@@ -218,5 +240,32 @@
     <div class="f2"><a href="mailto:giofregiovanni16@gmail.com">Email</a> &nbsp; <a href="https://www.linkedin.com/in/giovanni-giofre/">LinkedIn</a> &nbsp; <a href="https://github.com/giovannigiofre">GitHub</a></div>
   </footer>
 </div>
+<script>
+(function(){
+  var SOL="534678912672195348198342567859761423426853791713924856961537284287419635345286179",
+      PUZ="53..7....6..195....98....6.8...6...34..8.3..17...2...6.6....28....419..5....8..79",
+      b=document.getElementById('sdk'),lab=document.getElementById('sdkl'),bars=document.getElementById('sdkp').children,
+      hid=[],step={},cells=[],i;
+  for(i=0;i<81;i++){var r=Math.floor(i/9),c=i%9;if(PUZ[i]==='.')hid.push({i:i,k:(r*31+c*17+r*c*7)%23+i/100});}
+  hid.sort(function(a,z){return a.k-z.k});
+  hid.forEach(function(h,n){step[h.i]=Math.min(4,Math.floor(n/13)+1)});
+  for(i=0;i<81;i++){var d=document.createElement('div');b.appendChild(d);cells.push(d);}
+  function draw(s){
+    var n=0;
+    for(var i=0;i<81;i++){
+      var d=cells[i];
+      if(PUZ[i]!=='.'){d.textContent=PUZ[i];d.className='';}
+      else if(step[i]<=s){d.textContent=SOL[i];d.className='w'+(step[i]===s?' new':'');n++;}
+      else{d.textContent='';d.className='x';}
+    }
+    for(var j=0;j<4;j++)bars[j].className=j<s?'on':'';
+    lab.textContent=s===0?'51 cells to fill':'Step '+s+' of 4 · '+n+' of 51';
+  }
+  var still=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(still){draw(2);return;}
+  var s=0;draw(0);
+  (function tick(){setTimeout(function(){s=s===4?0:s+1;draw(s);tick();},s===4?2600:1300);})();
+})();
+</script>
 </body>
 </html>
